@@ -8,14 +8,14 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 
 # 1. Load dataset
-df = pd.read_csv("train.csv")
+df = pd.read_csv("breast-cancer.csv")
 
 print(df.head())
 print(df.info())
 
 
 # 2. Select useful columns
-df = df[
+'''df = df[
     [
         "Survived",
         "Pclass",
@@ -38,12 +38,12 @@ df["Embarked"] = df["Embarked"].fillna(df["Embarked"].mode()[0])
 le = LabelEncoder()
 
 df["Sex"] = le.fit_transform(df["Sex"])
-df["Embarked"] = le.fit_transform(df["Embarked"])
+df["Embarked"] = le.fit_transform(df["Embarked"])'''
 
 
 # 5. Separate input and target
-X = df.drop("Survived", axis=1)
-y = df["Survived"]
+X = df.drop("diagnosis", axis=1)
+y = df["diagnosis"]
 
 
 # 6. Split dataset
@@ -59,7 +59,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 # 7. Create Random Forest model
 model = RandomForestClassifier(
     n_estimators=12, #no of decision trees in that forest
-    max_depth=5, #max depth for each tree
+    max_depth=3, #max depth for each tree
     random_state=42
 )
 
@@ -103,7 +103,7 @@ for i in range(5):
     plot_tree(
         model.estimators_[i],
         feature_names=X.columns,
-        class_names=["Did Not Survive", "Survived"],
+        class_names=["Has tumor", "Has no tumor"],
         filled=True,
         rounded=True,
         fontsize=8

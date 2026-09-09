@@ -26,7 +26,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # Create Decision Tree
 model = DecisionTreeClassifier(
-    criterion='gini',
+    criterion='gini', #default is CART algorithm(squaring)
     max_depth=4,
     random_state=42
 )
