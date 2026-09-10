@@ -27,7 +27,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 #Adaboost model
-model = AdaBoostClassifier(
+model = AdaBoostClassifier(  #does not use max_depth directly as it uses a base estimator/ decision stump
     n_estimators=50,  #weak leaners are decision trees by default
     learning_rate=1.0, #contribution of each tree
     random_state=42
